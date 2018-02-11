@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luopc.web.center.user.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.luopc.web.center.user.model.User">
+    <id column="USER_ID" jdbcType="VARCHAR" property="userId" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+    <result column="CREDITS" jdbcType="DECIMAL" property="credits" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="LAST_VISIT" jdbcType="DATE" property="lastVisit" />
+    <result column="LAST_IP" jdbcType="VARCHAR" property="lastIp" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USER_ID, USER_NAME, CREDITS, PASSWORD, LAST_VISIT, LAST_IP
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from T_USER
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from T_USER
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.luopc.web.center.user.model.User">
+    insert into T_USER (USER_ID, USER_NAME, CREDITS, 
+      PASSWORD, LAST_VISIT, LAST_IP
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{credits,jdbcType=DECIMAL}, 
+      #{password,jdbcType=VARCHAR}, #{lastVisit,jdbcType=DATE}, #{lastIp,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.luopc.web.center.user.model.User">
+    insert into T_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        USER_ID,
+      </if>
+      <if test="userName != null">
+        USER_NAME,
+      </if>
+      <if test="credits != null">
+        CREDITS,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="lastVisit != null">
+        LAST_VISIT,
+      </if>
+      <if test="lastIp != null">
+        LAST_IP,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="credits != null">
+        #{credits,jdbcType=DECIMAL},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="lastVisit != null">
+        #{lastVisit,jdbcType=DATE},
+      </if>
+      <if test="lastIp != null">
+        #{lastIp,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luopc.web.center.user.model.User">
+    update T_USER
+    <set>
+      <if test="userName != null">
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="credits != null">
+        CREDITS = #{credits,jdbcType=DECIMAL},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="lastVisit != null">
+        LAST_VISIT = #{lastVisit,jdbcType=DATE},
+      </if>
+      <if test="lastIp != null">
+        LAST_IP = #{lastIp,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luopc.web.center.user.model.User">
+    update T_USER
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      CREDITS = #{credits,jdbcType=DECIMAL},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      LAST_VISIT = #{lastVisit,jdbcType=DATE},
+      LAST_IP = #{lastIp,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.luopc.web.center.user.model.User">
+    <result column="ID" jdbcType="CHAR" property="id" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="LOGIN_NAME" jdbcType="VARCHAR" property="loginName" />
+    <result column="AGE" jdbcType="DECIMAL" property="age" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="address" />
+    <result column="GENDER" jdbcType="DECIMAL" property="gender" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="ABBREVIATION" jdbcType="VARCHAR" property="abbreviation" />
+    <result column="BIRTH_DAY" jdbcType="DATE" property="birthDay" />
+    <result column="FAX" jdbcType="VARCHAR" property="fax" />
+    <result column="TENANT_ID" jdbcType="CHAR" property="tenantId" />
+    <result column="STATUS" jdbcType="DECIMAL" property="status" />
+    <result column="APPROVAL_STATUS" jdbcType="DECIMAL" property="approvalStatus" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="MODIFY_TIME" jdbcType="TIMESTAMP" property="modifyTime" />
+    <result column="CREATE_USER" jdbcType="CHAR" property="createUser" />
+    <result column="MODIFY_USER" jdbcType="CHAR" property="modifyUser" />
+    <result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+    <result column="TELEPHONE" jdbcType="VARCHAR" property="telephone" />
+    <result column="SHOW_ORDER" jdbcType="DECIMAL" property="showOrder" />
+    <result column="BEGIN_VALID_TIME" jdbcType="DATE" property="beginValidTime" />
+    <result column="END_VALID_TIME" jdbcType="DATE" property="endValidTime" />
+    <result column="IDENTITY_ID" jdbcType="CHAR" property="identityId" />
+    <result column="IS_SUPERADMIN" jdbcType="DECIMAL" property="isSuperadmin" />
+    <result column="UNIT_ID" jdbcType="CHAR" property="unitId" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.luopc.web.center.user.model.UserWithBLOBs">
+    <result column="PIC_URL" jdbcType="CLOB" property="picUrl" />
+    <result column="COMMENTS" jdbcType="CLOB" property="comments" />
+  </resultMap>
+  <sql id="Blob_Column_List">
+    PIC_URL, COMMENTS
+  </sql>
+  <insert id="insert" parameterType="com.luopc.web.center.user.model.UserWithBLOBs">
+    insert into T_USER (ID, NAME, LOGIN_NAME, 
+      AGE, ADDRESS, GENDER, 
+      EMAIL, ABBREVIATION, BIRTH_DAY, 
+      FAX, TENANT_ID, STATUS, 
+      APPROVAL_STATUS, CREATE_TIME, MODIFY_TIME, 
+      CREATE_USER, MODIFY_USER, MOBILE, 
+      TELEPHONE, SHOW_ORDER, BEGIN_VALID_TIME, 
+      END_VALID_TIME, IDENTITY_ID, IS_SUPERADMIN, 
+      UNIT_ID, PIC_URL, COMMENTS)
+    values (#{id,jdbcType=CHAR}, #{name,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, 
+      #{age,jdbcType=DECIMAL}, #{address,jdbcType=VARCHAR}, #{gender,jdbcType=DECIMAL}, 
+      #{email,jdbcType=VARCHAR}, #{abbreviation,jdbcType=VARCHAR}, #{birthDay,jdbcType=DATE}, 
+      #{fax,jdbcType=VARCHAR}, #{tenantId,jdbcType=CHAR}, #{status,jdbcType=DECIMAL}, 
+      #{approvalStatus,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=CHAR}, #{modifyUser,jdbcType=CHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{telephone,jdbcType=VARCHAR}, #{showOrder,jdbcType=DECIMAL}, #{beginValidTime,jdbcType=DATE}, 
+      #{endValidTime,jdbcType=DATE}, #{identityId,jdbcType=CHAR}, #{isSuperadmin,jdbcType=DECIMAL}, 
+      #{unitId,jdbcType=CHAR}, #{picUrl,jdbcType=CLOB}, #{comments,jdbcType=CLOB})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luopc.web.center.user.model.UserWithBLOBs">
+    insert into T_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="loginName != null">
+        LOGIN_NAME,
+      </if>
+      <if test="age != null">
+        AGE,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+      <if test="gender != null">
+        GENDER,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="abbreviation != null">
+        ABBREVIATION,
+      </if>
+      <if test="birthDay != null">
+        BIRTH_DAY,
+      </if>
+      <if test="fax != null">
+        FAX,
+      </if>
+      <if test="tenantId != null">
+        TENANT_ID,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="approvalStatus != null">
+        APPROVAL_STATUS,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="modifyTime != null">
+        MODIFY_TIME,
+      </if>
+      <if test="createUser != null">
+        CREATE_USER,
+      </if>
+      <if test="modifyUser != null">
+        MODIFY_USER,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="telephone != null">
+        TELEPHONE,
+      </if>
+      <if test="showOrder != null">
+        SHOW_ORDER,
+      </if>
+      <if test="beginValidTime != null">
+        BEGIN_VALID_TIME,
+      </if>
+      <if test="endValidTime != null">
+        END_VALID_TIME,
+      </if>
+      <if test="identityId != null">
+        IDENTITY_ID,
+      </if>
+      <if test="isSuperadmin != null">
+        IS_SUPERADMIN,
+      </if>
+      <if test="unitId != null">
+        UNIT_ID,
+      </if>
+      <if test="picUrl != null">
+        PIC_URL,
+      </if>
+      <if test="comments != null">
+        COMMENTS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="loginName != null">
+        #{loginName,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=DECIMAL},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=DECIMAL},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="abbreviation != null">
+        #{abbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="birthDay != null">
+        #{birthDay,jdbcType=DATE},
+      </if>
+      <if test="fax != null">
+        #{fax,jdbcType=VARCHAR},
+      </if>
+      <if test="tenantId != null">
+        #{tenantId,jdbcType=CHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=DECIMAL},
+      </if>
+      <if test="approvalStatus != null">
+        #{approvalStatus,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=CHAR},
+      </if>
+      <if test="modifyUser != null">
+        #{modifyUser,jdbcType=CHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="showOrder != null">
+        #{showOrder,jdbcType=DECIMAL},
+      </if>
+      <if test="beginValidTime != null">
+        #{beginValidTime,jdbcType=DATE},
+      </if>
+      <if test="endValidTime != null">
+        #{endValidTime,jdbcType=DATE},
+      </if>
+      <if test="identityId != null">
+        #{identityId,jdbcType=CHAR},
+      </if>
+      <if test="isSuperadmin != null">
+        #{isSuperadmin,jdbcType=DECIMAL},
+      </if>
+      <if test="unitId != null">
+        #{unitId,jdbcType=CHAR},
+      </if>
+      <if test="picUrl != null">
+        #{picUrl,jdbcType=CLOB},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=CLOB},
+      </if>
+    </trim>
+  </insert>
+</mapper>
